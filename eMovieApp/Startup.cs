@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eMovieApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace eMovieApp
 {
@@ -26,7 +27,7 @@ namespace eMovieApp
         {
 
             //Dbcontext configuration
-            services.AddDbContext<AppDbContext>();
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
             services.AddControllersWithViews();
         }
