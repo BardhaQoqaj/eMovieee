@@ -58,6 +58,10 @@ namespace eMovieApp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //Seed dB
+            AppDbInitializer.Seed(app);
+            
         }
     }
 }
