@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eMovieApp.Data.Services;
+using eMovieApp.Models;
 
 namespace eMovieApp.Controllers
 {
