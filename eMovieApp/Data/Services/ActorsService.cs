@@ -28,7 +28,8 @@ namespace eMovieApp.Data.Services
 
         public void Add(Actor actor)
         {
-            throw new NotImplementedException();
+            _context.Actors.Add(actor);
+            _context.SaveChanges();
         }
 
         public Actor Update(int id, Actor newActor)
