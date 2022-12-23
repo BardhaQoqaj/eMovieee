@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eMovieApp.Data;
+using eMovieApp.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovieApp
@@ -29,8 +30,14 @@ namespace eMovieApp
             //Dbcontext configuration
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
+            //Services Configuration
+
+            services.AddScoped<IActorsService, ActorsService>();
+
             services.AddControllersWithViews();
         }
+
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
