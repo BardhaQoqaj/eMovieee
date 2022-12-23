@@ -39,5 +39,15 @@ namespace eMovieApp.Controllers
             await _service.AddAsync(actor);
             return RedirectToAction(nameof(Index));
         }
+
+         //Get: Actors/Details/1
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+
+            if (actorDetails == null) return View("NotFound");
+            return View(actorDetails);
+        }
     }
 }
