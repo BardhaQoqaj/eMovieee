@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using eTickets.Data.Base;
+using eMovieApp.Data.Base;
 
 namespace eMovieApp.Models
 {

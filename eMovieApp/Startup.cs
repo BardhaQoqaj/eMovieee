@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using eMovieApp.Data;
-using eTickets.Data.Services;
+using eMovieApp.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovieApp
@@ -28,6 +28,7 @@ namespace eMovieApp
             //Services Configuration
 
             services.AddScoped<IActorsService, ActorsService>();
+            services.AddScoped<IProducersService, ProducersService>();
 
             services.AddControllersWithViews();
         }

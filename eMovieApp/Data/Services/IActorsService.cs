@@ -1,7 +1,7 @@
 ﻿using eMovieApp.Models;
-using eTickets.Data.Base;
+using eMovieApp.Data.Base;
 
-namespace eTickets.Data.Services
+namespace eMovieApp.Data.Services
 {
     public interface IActorsService : IEntityBaseRepository<Actor>
     {

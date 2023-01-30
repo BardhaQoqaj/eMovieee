@@ -7,8 +7,8 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using eMovieApp.Data;
 
-namespace eTickets.Data.Base
-{
+namespace eMovieApp.Data.Base
+{       
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
         private readonly AppDbContext _context;

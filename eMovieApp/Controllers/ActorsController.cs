@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using eTickets.Data.Services;
+using eMovieApp.Data.Services;
 
-namespace eTickets.Controllers
+namespace eMovieApp.Controllers
 {
  
     public class ActorsController : Controller
