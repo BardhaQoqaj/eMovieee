@@ -55,7 +55,7 @@ namespace eMovieApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Cinema cinema)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Logo,Description")] Cinema cinema)
         {
             if (!ModelState.IsValid) return View(cinema);
             
