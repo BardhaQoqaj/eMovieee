@@ -30,6 +30,7 @@ namespace eMovieApp
             services.AddScoped<IActorsService, ActorsService>();
             services.AddScoped<IProducersService, ProducersService>();
             services.AddScoped<ICinemasService, CinemasService>();
+            services.AddScoped<IMoviesService, MoviesService>();
 
 
             services.AddControllersWithViews();
