@@ -9,3 +9,6 @@ namespace eMovieApp.Data.Services
         public ActorsService(AppDbContext context) : base(context) { }
     }
 }
+
+
+
