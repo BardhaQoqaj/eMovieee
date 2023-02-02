@@ -35,6 +35,7 @@ namespace eMovieApp
             services.AddScoped<IMoviesService, MoviesService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+            services.AddScoped<IOrdersService, OrdersService>();
 
             services.AddSession();
 

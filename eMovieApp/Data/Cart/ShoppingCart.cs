@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace eMovieApp.Data.Cart
 {
@@ -15,7 +16,7 @@ namespace eMovieApp.Data.Cart
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
         public ShoppingCart(AppDbContext context)
         {
-        _context= context;
+            _context = context;
         }
 
         public static ShoppingCart GetShoppingCart(IServiceProvider services)
@@ -31,10 +32,10 @@ namespace eMovieApp.Data.Cart
 
         public void AddItemToCart(Movie movie)
         {
-            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id ==movie.Id && 
+            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id &&
             n.ShoppingCartId == ShoppingCartId);
 
-            if(shoppingCartItem == null)
+            if (shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem()
                 {
@@ -45,7 +46,8 @@ namespace eMovieApp.Data.Cart
 
                 _context.ShoppingCartItems.Add(shoppingCartItem);
 
-            } else
+            }
+            else
             {
                 shoppingCartItem.Amount++;
             }
@@ -60,8 +62,8 @@ namespace eMovieApp.Data.Cart
 
             if (shoppingCartItem != null)
             {
-                
-                if(shoppingCartItem.Amount>1)
+
+                if (shoppingCartItem.Amount > 1)
                 {
                     shoppingCartItem.Amount--;
                 }
@@ -70,20 +72,27 @@ namespace eMovieApp.Data.Cart
                     _context.ShoppingCartItems.Remove(shoppingCartItem);
                 }
             }
-          
+
             _context.SaveChanges();
         }
 
-        public List<ShoppingCartItem>GetShoppingCartItems() 
+        public List<ShoppingCartItem> GetShoppingCartItems()
         {
-        return ShoppingCartItems ?? (ShoppingCartItems=_context.ShoppingCartItems.Where(n=>n.ShoppingCartId==
-        ShoppingCartId).Include(n=>n.Movie).ToList());
+            return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems.Where(n => n.ShoppingCartId ==
+            ShoppingCartId).Include(n => n.Movie).ToList());
         }
 
-        public double GetShoppingCartTotal()=>
-             _context.ShoppingCartItems.Where(n => n.ShoppingCartId==ShoppingCartId).Select(n => 
+        public double GetShoppingCartTotal() =>
+             _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Select(n =>
             n.Movie.Price * n.Amount).Sum();
-            
+
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
+            _context.ShoppingCartItems.RemoveRange(items);
+            await _context.SaveChangesAsync();
+
         }
     }
+}
 

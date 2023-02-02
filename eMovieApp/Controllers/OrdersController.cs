@@ -1,4 +1,5 @@
 ﻿using eMovieApp.Data.Cart;
+using eMovieApp.Data.Services;
 using eMovieApp.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -7,13 +8,15 @@ namespace eMovieApp.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly IMoviesServices _moviesServices;
+        private readonly IMoviesService _moviesServices;
         private readonly ShoppingCart _shoppingCart;
+        private readonly IOrdersService _ordersService;
 
-        public OrdersController(IMoviesServices moviesServices, ShoppingCart shoppingCart)
+        public OrdersController(IMoviesService moviesServices, ShoppingCart shoppingCart ,IOrdersService ordersService)
         {
             _moviesServices = moviesServices;
             _shoppingCart = shoppingCart;
+            _ordersService = ordersService;
         }
         public IActionResult Index()
         {
@@ -37,15 +40,16 @@ namespace eMovieApp.Controllers
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
-        public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
+        public async Task<IActionResult> CompleteOrder()
         {
-            var item = await _moviesService.GetMovieByIdAsync(id);
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmailAddress = "";
 
-            if (item != null)
-            {
-                _shoppingCart.RemoveItemFromCart(item);
-            }
-            return RedirectToAction(nameof(ShoppingCart));
+            await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+            await _shoppingCart.ClearShoppingCartAsync();
+
+            return View("OrderCompleted");
         }
     }
 }
