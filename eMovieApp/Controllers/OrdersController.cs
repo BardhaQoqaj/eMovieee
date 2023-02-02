@@ -18,7 +18,16 @@ namespace eMovieApp.Controllers
             _shoppingCart = shoppingCart;
             _ordersService = ordersService;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
+        }
+
+        public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
