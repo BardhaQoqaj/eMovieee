@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eMovieApp.Data.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using eMovieApp.Data.Base;
 
 namespace eMovieApp.Models
 {
-    public class Cinema : IEntityBase
+    public class Cinema:IEntityBase
     {
         [Key]
         public int Id { get; set; }

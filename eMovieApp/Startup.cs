@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using eMovieApp.Data;
 using eMovieApp.Data.Services;
 using Microsoft.EntityFrameworkCore;
+using eMovieApp.Data.Cart;
+using Microsoft.AspNetCore.Http;
 
 namespace eMovieApp
 {
@@ -31,10 +33,16 @@ namespace eMovieApp
             services.AddScoped<IProducersService, ProducersService>();
             services.AddScoped<ICinemasService, CinemasService>();
             services.AddScoped<IMoviesService, MoviesService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+            services.AddScoped<IOrdersService, OrdersService>();
 
+            services.AddSession();
 
             services.AddControllersWithViews();
         }
+
+
 
         
 
@@ -55,6 +63,7 @@ namespace eMovieApp
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
