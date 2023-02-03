@@ -8,13 +8,13 @@ namespace eMovieApp.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly IMoviesService _moviesServices;
+        private readonly IMoviesService _moviesService;
         private readonly ShoppingCart _shoppingCart;
         private readonly IOrdersService _ordersService;
 
-        public OrdersController(IMoviesService moviesServices, ShoppingCart shoppingCart ,IOrdersService ordersService)
+        public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart ,IOrdersService ordersService)
         {
-            _moviesServices = moviesServices;
+            _moviesService = moviesService;
             _shoppingCart = shoppingCart;
             _ordersService = ordersService;
         }
