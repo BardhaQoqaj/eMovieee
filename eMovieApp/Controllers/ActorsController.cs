@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using eMovieApp.Data.Services;
+using eMovieApp.Data.Static;
 
 namespace eMovieApp.Controllers
 {
- 
+
+    [Authorize(Roles = UserRoles.Admin)]
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;

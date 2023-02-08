@@ -352,12 +352,12 @@ namespace eMovieApp.Data
                         Email = adminUserEmail,
                         EmailConfirmed = true
                     };
-                    await userManager.CreateAsync(newAdminUser, "eMovie123"); //me shtu userin ndatabaze 
+                    await userManager.CreateAsync(newAdminUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
 
-                string appUserEmail = "user@eMovie.com";
+                string appUserEmail = "user@etickets.com";
 
                 var appUser = await userManager.FindByEmailAsync(appUserEmail);
                 if (appUser == null)
@@ -369,14 +369,10 @@ namespace eMovieApp.Data
                         Email = appUserEmail,
                         EmailConfirmed = true
                     };
-                    await userManager.CreateAsync(newAppUser, "eMovie123");
+                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
             }
         }
-
-
     }
 }
-
-

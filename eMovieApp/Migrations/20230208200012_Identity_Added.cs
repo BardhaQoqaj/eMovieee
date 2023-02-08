@@ -36,6 +36,15 @@ namespace eMovieApp.Migrations
                 newName: "IX_OrderItems_MovieId");
 
             migrationBuilder.AlterColumn<string>(
+                name: "UserId",
+                table: "Orders",
+                type: "nvarchar(450)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Cinemas",
                 type: "nvarchar(max)",
@@ -217,6 +226,11 @@ namespace eMovieApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -270,6 +284,13 @@ namespace eMovieApp.Migrations
                 principalTable: "Orders",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Orders_AspNetUsers_UserId",
+                table: "Orders",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -281,6 +302,10 @@ namespace eMovieApp.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_OrderItems_Orders_OrderID",
                 table: "OrderItems");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Orders_AspNetUsers_UserId",
+                table: "Orders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -303,6 +328,10 @@ namespace eMovieApp.Migrations
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
+            migrationBuilder.DropIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders");
+
             migrationBuilder.DropPrimaryKey(
                 name: "PK_OrderItems",
                 table: "OrderItems");
@@ -320,6 +349,15 @@ namespace eMovieApp.Migrations
                 name: "IX_OrderItems_MovieId",
                 table: "OrderItem",
                 newName: "IX_OrderItem_MovieId");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "UserId",
+                table: "Orders",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(450)",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",

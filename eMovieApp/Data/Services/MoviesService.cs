@@ -71,5 +71,10 @@ namespace eMovieApp.Data.Services
 
             return response;
         }
+
+        public Task UpdateMovieAsync(NewMovieVM data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

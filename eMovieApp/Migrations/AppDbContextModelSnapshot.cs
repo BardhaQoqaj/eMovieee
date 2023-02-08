@@ -212,9 +212,11 @@ namespace eMovieApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -467,6 +469,15 @@ namespace eMovieApp.Migrations
                     b.Navigation("Cinema");
 
                     b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("eMovieApp.Models.Order", b =>
+                {
+                    b.HasOne("eMovieApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("eMovieApp.Models.OrderItem", b =>

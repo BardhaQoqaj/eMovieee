@@ -12,7 +12,7 @@ using eMovieApp.Data;
 namespace eMovieApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230206132900_Identity_Added")]
+    [Migration("20230208200012_Identity_Added")]
     partial class Identity_Added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -214,9 +214,11 @@ namespace eMovieApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -469,6 +471,15 @@ namespace eMovieApp.Migrations
                     b.Navigation("Cinema");
 
                     b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("eMovieApp.Models.Order", b =>
+                {
+                    b.HasOne("eMovieApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("eMovieApp.Models.OrderItem", b =>

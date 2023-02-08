@@ -71,13 +71,13 @@ namespace eMovieApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-
-
             app.UseStaticFiles();
 
             app.UseRouting();
             app.UseSession();
             app.UseAuthentication();
+    
+            app.UseAuthorization();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -88,6 +88,7 @@ namespace eMovieApp
             });
 
             //Seed dB
+            
             AppDbInitializer.Seed(app);
             AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
